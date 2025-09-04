@@ -1,25 +1,44 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cadastro MAGNATUNS</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro MAGNATUNS</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Cadastre-se e fique por dentro</h2>
+            <p>Insira seu e-mail para receber novidades exclusivas e atualizações direto no seu inbox.</p>
+            <form id="emailForm">
+                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+                <button type="submit">Enviar</button>
+                <div id="message"></div>
+            </form>
+        </div>
+    </section>
 
-<section class="cta-section">
-  <div class="cta-content">
-    <h2>Cadastre-se e fique por dentro</h2>
-    <p>Insira seu e-mail para receber novidades exclusivas e atualizações direto no seu inbox.</p>
-    <form id="emailForm">
-      <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
-      <button type="submit">Enviar</button>
-      <div id="message"></div>
-    </form>
-  </div>
-</section>
-
-<script src="script.js"></script>
+    <script>
+        // Script para mostrar mensagem de status
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const messageDiv = document.getElementById('message');
+            const email = document.getElementById('email').value;
+            
+            // Simulação de envio
+            messageDiv.textContent = 'Obrigado por se cadastrar! Em breve você receberá nossas novidades.';
+            messageDiv.style.background = 'rgba(212, 175, 55, 0.2)';
+            messageDiv.style.color = '#D4AF37';
+            messageDiv.style.border = '1px solid rgba(212, 175, 55, 0.3)';
+            messageDiv.classList.add('show');
+            
+            // Limpar após 5 segundos
+            setTimeout(() => {
+                messageDiv.classList.remove('show');
+                document.getElementById('emailForm').reset();
+            }, 5000);
+        });
+    </script>
 </body>
 </html>
