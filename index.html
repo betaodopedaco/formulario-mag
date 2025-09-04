@@ -1,44 +1,251 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro MAGNATUNS</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro MAGNATUNS</title>
+<style>
+/* Variáveis de cores */
+:root {
+  --dourado: #D4AF37;
+  --dourado-escuro: #B8860B;
+  --preto: #000000;
+  --preto-cinza: #0A0A0A;
+  --branco: #FFFFFF;
+  --azul-escuro: #00072D;
+  --azul-poeira: #001C55;
+}
+
+/* Reset e estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, var(--preto) 0%, var(--azul-escuro) 100%);
+  color: var(--branco);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efeito de partículas douradas no fundo */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 20%),
+    radial-gradient(circle at 90% 60%, rgba(212, 175, 55, 0.08) 0%, transparent 25%),
+    radial-gradient(circle at 50% 80%, rgba(212, 175, 55, 0.05) 0%, transparent 15%);
+  z-index: -1;
+}
+
+/* Padrão geométrico sutil */
+body::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(30deg, rgba(0, 7, 45, 0.1) 0%, transparent 50%),
+    repeating-linear-gradient(45deg, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 1px, transparent 1px, transparent 6px);
+  z-index: -1;
+}
+
+/* Container principal */
+.cta-section {
+  width: 100%;
+  max-width: 600px;
+  background: rgba(10, 10, 10, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 16px;
+  padding: 40px 30px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(212, 175, 55, 0.2);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Efeito de brilho interno */
+.cta-section::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.1) 0%, transparent 70%);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+/* Conteúdo */
+.cta-content {
+  position: relative;
+  z-index: 2;
+}
+
+.cta-content h2 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--dourado);
+  text-align: center;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+.cta-content p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Formulário */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+input[type="email"] {
+  padding: 16px 20px;
+  background: rgba(0, 7, 45, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 8px;
+  color: var(--branco);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+input[type="email"]:focus {
+  border-color: var(--dourado);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  background: rgba(0, 7, 45, 0.5);
+}
+
+input[type="email"]::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+button {
+  padding: 16px 20px;
+  background: linear-gradient(135deg, var(--dourado) 0%, var(--dourado-escuro) 100%);
+  color: var(--preto);
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  letter-spacing: 1px;
+}
+
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: all 0.5s ease;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+/* Mensagem de status */
+#message {
+  text-align: center;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  margin-top: 10px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+#message.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .cta-section {
+    padding: 30px 20px;
+  }
+  
+  .cta-content h2 {
+    font-size: 24px;
+  }
+  
+  .cta-content p {
+    font-size: 14px;
+  }
+}
+</style>
 </head>
 <body>
-    <section class="cta-section">
-        <div class="cta-content">
-            <h2>Cadastre-se e fique por dentro</h2>
-            <p>Insira seu e-mail para receber novidades exclusivas e atualizações direto no seu inbox.</p>
-            <form id="emailForm">
-                <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
-                <button type="submit">Enviar</button>
-                <div id="message"></div>
-            </form>
-        </div>
-    </section>
 
-    <script>
-        // Script para mostrar mensagem de status
-        document.getElementById('emailForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const messageDiv = document.getElementById('message');
-            const email = document.getElementById('email').value;
-            
-            // Simulação de envio
-            messageDiv.textContent = 'Obrigado por se cadastrar! Em breve você receberá nossas novidades.';
-            messageDiv.style.background = 'rgba(212, 175, 55, 0.2)';
-            messageDiv.style.color = '#D4AF37';
-            messageDiv.style.border = '1px solid rgba(212, 175, 55, 0.3)';
-            messageDiv.classList.add('show');
-            
-            // Limpar após 5 segundos
-            setTimeout(() => {
-                messageDiv.classList.remove('show');
-                document.getElementById('emailForm').reset();
-            }, 5000);
-        });
-    </script>
+<section class="cta-section">
+  <div class="cta-content">
+    <h2>Cadastre-se e fique por dentro</h2>
+    <p>Insira seu e-mail para receber novidades exclusivas e atualizações direto no seu inbox.</p>
+    <form id="emailForm">
+      <input type="email" id="email" name="email" placeholder="Digite seu e-mail" required>
+      <button type="submit">Enviar</button>
+      <div id="message"></div>
+    </form>
+  </div>
+</section>
+
+<script>
+// Script para mostrar mensagem de status (mantido do original com pequena adição)
+document.getElementById('emailForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const messageDiv = document.getElementById('message');
+  const email = document.getElementById('email').value;
+  
+  // Simulação de envio
+  messageDiv.textContent = 'Obrigado por se cadastrar! Em breve você receberá nossas novidades.';
+  messageDiv.classList.add('show');
+  
+  // Limpar após 5 segundos
+  setTimeout(() => {
+    messageDiv.classList.remove('show');
+    document.getElementById('emailForm').reset();
+  }, 5000);
+});
+</script>
 </body>
 </html>
